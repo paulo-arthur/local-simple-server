@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
-import json
+import json, os
+from pyngrok import ngrok
 
 app = Flask(__name__)
 
@@ -20,6 +21,11 @@ def delete():
     msg = []
     print(msg)
     return ''
+
+http = ngrok.connect(5000)
+http = http.public_url.strip('http://').strip('.ngrok.io')
+
+print('Ngrok code: ' + http)
 
 if __name__ == "__main__":
     app.run(debug=True)
